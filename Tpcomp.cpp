@@ -30,30 +30,8 @@ main(void)
     //for the user input
     char* next = (char*)malloc(sizeof(char)*10);
     memset(next,0,sizeof(next));
-    stack input;
-    input.head = NULL;
-    push(&input,"id");
-    push(&input,"=");
-    push(&input,"id");
-    push(&input,"print");
-    push(&input,"else");
-    push(&input,"end");
-    push(&input,"id");
-    push(&input,"=");
-    push(&input,"id");
-    push(&input,"print");
-    push(&input,";");
-    push(&input,"id");
-    push(&input,"=");
-    push(&input,"id");
-    push(&input,"print");
-    push(&input,"begin");
-    push(&input,"then");
-    push(&input,"id");
-    push(&input,"=");
-    push(&input,"id");
-    push(&input,"if");
-
+    FILE* fp = fopen("input","r");
+    int oef = 0;
 
     //for the parser stack
     stack st;
@@ -62,18 +40,17 @@ main(void)
 
     //str value
     char* top = (char*)malloc(sizeof(char)*10);
-    memset(next,0,sizeof(next));
-    strcpy(next,pop(&input));
 
+    get_next(fp,&oef,next);
     do
     {
-        memset(top,0,sizeof(next));
+        memset(top,0,sizeof(top));
         strcpy(top,pop(&st));
 
         if(is_terminal(top)!= -1 && !strcmp(top,next))
         {
             memset(next,0,sizeof(next));
-            strcpy(next,pop(&input));
+            get_next(fp,&oef,next);
         } else if(non_terminal(top)!= -1 && check_rule(top,next))
         {
             push_rule(&st,get_rule(top,next));
@@ -81,12 +58,14 @@ main(void)
         {
             goto doom;
         }
-    }while(!is_empty(&st) && !is_empty(&input));
-    printf("fucking valid input\n");
+    }while(!is_empty(&st) && !oef);
+    printf("valid input\n");
+    fclose(fp);
 
     return(0);
 doom:
-    printf("the input sucks and so are you a**hole\n");
+    fclose(fp);
+    printf("the input sucks and so are *******\n");
     return(-1);
 }
 

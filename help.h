@@ -3,6 +3,25 @@
 #include <string.h>
 #include "stack.h"
 #include <stdio.h>
+#include <ctype.h>
+
+
+
+void get_next(FILE* fp,int* oef,char* next)
+{
+    char c = fgetc(fp);
+    while(c == ' ' || c == '\n')
+        c=fgetc(fp);
+    char str[100] = {0};
+    int i =0;
+    while(c != ' ' && c != '\n')
+        str[i++] = c,c = fgetc(fp);
+    if(c == EOF)
+        *oef = 1;
+    printf("%s\n",str);
+    strcpy(next,str);
+}
+
 int is_terminal(const char *str)
 {
     char termianls[11][6] = {

@@ -1,0 +1,7 @@
+if id = id then
+    begin
+    print id = id
+    end
+    else
+        print id = id
+        end

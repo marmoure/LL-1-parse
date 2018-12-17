@@ -18,7 +18,6 @@ void get_next(FILE* fp,int* oef,char* next)
         str[i++] = c,c = fgetc(fp);
     if(c == EOF)
         *oef = 1;
-    printf("%s\n",str);
     strcpy(next,str);
 }
 

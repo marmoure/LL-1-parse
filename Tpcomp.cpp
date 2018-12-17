@@ -2,25 +2,6 @@
 #include "stack.h"
 #include "help.h"
 
-
-
-
-/*
-next <- first token of the input
-stack <- START_SYMBOL
-do {
-    top <- stack.pop()
-    if (top is a terminal and top == next) {
-        next <- next token of the input
-    } else if (top is a non terminal and PARSING_TABLE[top, next] exists) {
-        stack.push(PARSING_TABLE[top, next]);
-    } else {
-         return invalid input;
-    }
-} while (stack is not empty);
-return valid input;
-*/
-
 int
 main(void)
 {
